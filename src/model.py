@@ -11,7 +11,7 @@ def criar_modelo(
     learning_rate=0.001,
     optimizer_name='adam',
     loss='binary_crossentropy',
-    metrics=['accuracy'],
+    metrics=['Recall'],
     dropout_rate=0.0
 ):
 
