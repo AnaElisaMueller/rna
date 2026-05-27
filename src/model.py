@@ -1,7 +1,7 @@
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Dropout
 from tensorflow.keras.optimizers import Adam, SGD, RMSprop
-
+from tensorflow.keras.metrics import Recall
 
 def criar_modelo(
     input_dim,
@@ -11,12 +11,13 @@ def criar_modelo(
     learning_rate=0.001,
     optimizer_name='adam',
     loss='binary_crossentropy',
-    metrics=['Recall'],
+    metrics=None,
     dropout_rate=0.0
 ):
 
     model = Sequential()
 
+    
     model.add(Dense(
         units=neuronios_camadas[0],
         activation=activation,
@@ -64,6 +65,8 @@ def criar_modelo(
             "Otimizador inválido. Use: 'adam', 'sgd' ou 'rmsprop'."
         )
 
+    if metrics is None:
+        metrics = [Recall(name='recall')]
 
     model.compile(
         optimizer=optimizer,
